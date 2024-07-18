@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Comaptible" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Mathematic challenge</title>
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/participantsview.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/participants.css') }}">
         <style>
           
                 body {
