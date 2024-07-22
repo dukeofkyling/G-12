@@ -13,10 +13,9 @@
                     </div>   
                     <form method="post" action="{{ route('representatives.store') }}">
     @csrf <!-- Add the CSRF token -->
-    <input type="text" name="repName" placeholder="Representative Name">
-    <input type="email" name="repEmail" placeholder="Representative Email">
-    <input type="text" name="schoolRegNo" placeholder="School Registration Number">
-    <!-- Other form fields if needed -->
+    <input type="text" name="repName" placeholder="Representative Name" required>
+    <input type="email" name="repEmail" placeholder="Representative Email" required>
+    <input type="text" name="schoolRegNo" placeholder="School Registration Number" required>
     <button type="submit">Submit</button>
 </form>
                 </div>
