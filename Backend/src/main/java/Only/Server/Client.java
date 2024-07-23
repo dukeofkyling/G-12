@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Client {
     public static void main(String[] args) {
         String serverAddress = "localhost";
-        int port = 8000;
+        int port = 8080;
         boolean isLoggedIn = false;
         String currentUsername = "";
 
@@ -27,7 +27,7 @@ public class Client {
                     } else {
                         System.out.println("1. View Challenges");
                         System.out.println("2. Attempt Challenge");
-                        System.out.println("3. View Applicants");
+                        System.out.println("3. ViewApplicants");
                         System.out.println("4. Logout");
                     }
                     System.out.println("Type 'exit' to quit.");
@@ -42,15 +42,21 @@ public class Client {
                     if (!isLoggedIn) {
                         if (choice.equals("1") || choice.equals("register")) {
                             // Registration process
-                            System.out.print("Enter Username password firstName lastName email dateOfBirth schoolRegNumber ");
+                            System.out.println("Username password firstName lastName email dateOfBirth schoolRegNumber ");
 
-                            String username = scanner.nextLine();
-                            String password = scanner.nextLine();
-                            String firstName = scanner.nextLine();
-                            String lastName = scanner.nextLine();
-                            String email = scanner.nextLine();
-                            String dateOfBirth = scanner.nextLine();
-                            String schoolRegNumber = scanner.nextLine();
+
+                            String store = scanner.nextLine();
+                            String[] each = store.split(" ");
+
+                            String username = each[0];
+                            String password = each[1];
+                            String firstName = each[2];
+                            String lastName = each[3];
+                            String email = each[4];
+                            String dateOfBirth = each[5];
+                            String schoolRegNumber = each[6];
+
+
 
 
 
@@ -96,22 +102,51 @@ public class Client {
                             out.println("attempt:" + currentUsername + ";" + challengeId);
                             String serverResponse = in.readLine();
                             System.out.println(serverResponse);
-                        } else if (choice.equals("3") || choice.equals("view participants")) {
-                            // View participants
-                            out.println("viewparticipant:" + currentUsername);
-                            String serverResponse = in.readLine();
-                            System.out.println(serverResponse);
-                        } else if (choice.equals("4") || choice.equals("logout")) {
-                            // Logout process
-                            isLoggedIn = false;
-                            currentUsername = "";
-                            System.out.println("You have been logged out.");
-                        } else {
-                            System.out.println("Invalid choice. Please try again.");
-                        }
+                        // } else if (choice.equals("3") || choice.equals("view participants")) {
+                        //     // View participants
+                        //     out.println("viewparticipant:" + currentUsername);
+                        //     String serverResponse = in.readLine();
+                        //     System.out.println(serverResponse);
+                        // Inside the main method, after the initial welcome message and menu display
+                         } else if (choice.equals("3") || choice.equals("view applicants")) {
+                                // Send a request to the server to view applicants
+                                out.println("viewapplicant:" + currentUsername); // Assuming the server expects the current user's username
+                                String serverResponse = in.readLine(); // Read the server's response
+
+                                // Process the server's response
+                                if (serverResponse != null && !serverResponse.isEmpty()) {
+                                    // Assuming the server responds with a comma-separated list of applicants
+                                    // You may need to adjust this logic based on the actual format of the server's response
+                                    String[] applicants = serverResponse.split(",");
+                                    System.out.println("Applicants:");
+                                    for (String applicant : applicants) {
+                                        System.out.println(applicant.trim()); // Display each applicant
+                                    }
+                                } else {
+                                    System.out.println("No applicants found.");
+                                }
+                            } else if (choice.equals("4") || choice.equals("logout")) {
+                                // Logout process
+                                isLoggedIn = false;
+                                currentUsername = "";
+                                System.out.println("You have been logged out.");
+                            } else {
+                                System.out.println("Invalid choice. Please try again.");
+                            }
+
+                        // } else if (choice.equals("4") || choice.equals("logout")) {
+                        //     // Logout process
+                        //     isLoggedIn = false;
+                        //     currentUsername = "";
+                        //     System.out.println("You have been logged out.");
+                        // } else {
+                        //     System.out.println("Invalid choice. Please try again.");
+                        // }
+
                     }
                 }
             }
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
