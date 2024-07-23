@@ -14,6 +14,19 @@ use App\Http\Controllers\QuestionController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+Route::get('/admin/questions/import', [QuestionController::class, 'showImportForm'])->name('questions.import.form');
+Route::post('/admin/questions/import', [QuestionController::class, 'import'])->name('questions.import');
+
+
+
+
+
+Route::get('answer/import',[App\Http\Controllers\AnswerController::class,'index']);
+
+
+
 Route::get('/questions/import', [QuestionController::class, 'showImportForm'])->name('questions.import');
 Route::post('/questions/import', [QuestionController::class, 'import'])->name('questions.import.post');
 

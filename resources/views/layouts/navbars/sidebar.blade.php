@@ -46,6 +46,28 @@ Tip 2: you can also add an image using data-image tag
                 </div>
             </li>
 
+<!-- resources/views/admin/partials/sidebar.blade.php -->
+<ul class="nav">
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('questions.import.form') }}">
+            <i class="fa fa-upload"></i>
+            <p>Import Questions</p>
+        </a>
+    </li>
+    <!-- Other menu items -->
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
             <li class="nav-item @if($activePage == 'table') active @endif">
                 <a class="nav-link" href="{{route('page.index', 'table')}}">
                     <i class="nc-icon nc-notes"></i>
