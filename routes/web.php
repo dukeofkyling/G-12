@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RepresentativeController;
-
+use App\Http\Controllers\QuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +14,8 @@ use App\Http\Controllers\RepresentativeController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/questions/import', [QuestionController::class, 'showImportForm'])->name('questions.import');
+Route::post('/questions/import', [QuestionController::class, 'import'])->name('questions.import.post');
 
 Route::get('/', function () {
     return view('welcome');
