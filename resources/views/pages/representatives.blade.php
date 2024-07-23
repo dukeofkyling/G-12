@@ -1,14 +1,15 @@
-@extends('layouts.app', ['activePage' => 'typography', 'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION', 'navName' => 'Typography', 'activeButton' => 'laravel'])
+@extends('welcome', ['activePage' => 'typography', 'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION', 'navName' => 'Typography', 'activeButton' => 'laravel'])
 
 @section('content')
+<div class="full-page section-image" data-image="{{asset('light-bootstrap/img/bg5.jpg')}}">
     <div class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Light Bootstrap Table Heading</h4>
-                            <p class="card-category">Created using Montserrat Font Family</p>
+                            <h4 class="card-title" style="border:none;"><b>The Details Of The Representaives<b></h4>
+                            
                         </div>
                     </div>   
                     <form method="post" action="{{ route('representatives.store') }}">
@@ -23,4 +24,5 @@
             </div>
         </div>
     </div>
+</div>        
 @endsection
