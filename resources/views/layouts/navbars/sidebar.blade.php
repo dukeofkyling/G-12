@@ -14,33 +14,39 @@ Tip 2: you can also add an image using data-image tag
                         </a>
                     </li>
            
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" href="#laravelExamples" @if($activeButton =='laravel') aria-expanded="true" @endif>
-                    <i>
-                        <img src="{{ asset('light-bootstrap/img/laravel.svg') }}" style="width:25px">
-                    </i>
-                    <p>
-                        {{ __('Questions & Answers') }}
-                        <b class="caret"></b>
-                    </p>
-                </a>
-                <div class="collapse @if($activeButton =='laravel') show @endif" id="laravelExamples">
-                    <ul class="nav">
-                        <li class="nav-item @if($activePage == 'user') active @endif">
-                            <a class="nav-link" href="{{route('profile.edit')}}">
-                                <i class="nc-icon nc-single-02"></i>
-                                <p>{{ __("Questions") }}</p>
-                            </a>
-                        </li>
-                        <li class="nav-item @if($activePage == 'user-management') active @endif">
-                            <a class="nav-link" href="{{route('user.index')}}">
-                                <i class="nc-icon nc-circle-09"></i>
-                                <p>{{ __("Answers") }}</p>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
+            <!-- resources/views/admin/dashboard.blade.php -->
+<ul class="nav flex-column">
+    <!-- other menu items -->
+    <li class="nav-item">
+        <a class="nav-link d-flex align-items-center" href="{{ route('answers.import') }}">
+            <i class="fas fa-file-import me-2"></i> Import Answers
+        </a>
+    </li>
+</ul>
+          <!-- resources/views/admin/dashboard.blade.php -->
+          <ul class="nav flex-column">
+    <!-- other menu items -->
+    <li class="nav-item">
+        <a class="nav-link d-flex align-items-center" href="{{ route('questions.import') }}">
+            <i class="fas fa-file-import me-2"></i> Import Questions
+        </a>
+    </li>
+</ul>
+
+
+
+
+
+
+
+<!-- Include Bootstrap JS for proper rendering of icons -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
+
 
             <li class="nav-item @if($activePage == 'table') active @endif">
                 <a class="nav-link" href="{{route('page.index', 'schools')}}">

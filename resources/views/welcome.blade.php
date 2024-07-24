@@ -1,4 +1,4 @@
-@extends('layouts/app', ['activePage' => 'welcome', 'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION'])
+@extends('layouts/app', ['activePage' => 'welcome', 'title' => 'Inter-School Mathematics Competition'])
 
 @section('content')
     <div class="full-page section-image" data-image="{{asset('light-bootstrap/img/books.webp')}}">
@@ -6,7 +6,7 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-7 col-md-8">
-                        <h1 class="text-white text-center">{{ __('welcome to inter-school Mathematic competition.') }}</h1>
+                        <h1 class="text-white text-center">{{ __('Welcome To The Inter-School Mathematics Competition') }}</h1>
                     </div>
                 </div>
             </div>
