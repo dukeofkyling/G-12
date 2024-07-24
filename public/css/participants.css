@@ -1,14 +1,29 @@
 
-*{
+/* *{
     margin:0;
     padding:0;
     box-sizing:border-box;
     font-family:"poppins",sans-serif;
-} 
-.center{
-    width: 50%;
-    margin: auto;
+   position: absolute;
+}  */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    min-height: 100vh; 
+    /* position: fixed; */
+    display: flex;
+    padding-top: 20px;
+    left: 800px;
+  }
+  .center{
     position: absolute;
-    padding-top: 200px;
-    left: 30%;
-}
+  }
+  
+  input {
+    width: 400px;
+   
+  }
+  h2{
+    padding-top: 30px;
+  }
