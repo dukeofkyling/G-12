@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RepresentativeController;
-
-
+use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\QuestionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,6 +14,27 @@ use App\Http\Controllers\RepresentativeController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/admin/import-questions', 'Admin\ImportController@showImportForm')->name('admin.import.questions.form');
+Route::post('/admin/import-questions', 'Admin\ImportController@importQuestions')->name('admin.import.questions');
+
+
+
+Route::get('questions/import', [QuestionController::class, 'showImportForm'])->name('questions.import');
+Route::post('questions/import', [QuestionController::class, 'import'])->name('questions.import.post');
+
+
+Route::get('/admin/answers/import', [AnswerController::class, 'showImportForm'])->name('answers.import');
+Route::post('/admin/answers/import', [AnswerController::class, 'import'])->name('answers.import.post');
+
+
+
+
+Route::get('answers/import', [AnswerController::class, 'showImportForm'])->name('answers.import.form');
+Route::post('answers/import', [AnswerController::class, 'import'])->name('answers.import.post');
+
+
+
 
 Route::get('/', function () {
     return view('welcome');

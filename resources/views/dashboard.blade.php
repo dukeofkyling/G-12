@@ -21,7 +21,7 @@
     <body>
     <div class="center">
                 <h1 style="font-weight:900;"><b>inter-school math challenge<b></h1>
-                    <p style="font-size:21px;"><b>Mathematics challenge, welcome to the this challenge. make sure you attempt the questions
+                    <p style="font-size:21px;"><b>hh Mathematics challenge, welcome to the this challenge. make sure you attempt the questions
                         they all carry equal marks and marks are to be deducted incase you skip a qestion.
                          Competitions help identify students with higher abilities in mathematics. <br><b>sucess in your attempts<b><br><b></p>
                 </div>
