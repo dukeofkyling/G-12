@@ -1,0 +1,9 @@
+com\challenge\client\AttemptChallenge$Question.class
+com\challenge\client\ClientHandler.class
+com\challenge\client\Main.class
+com\challenge\client\ViewChallenges.class
+com\challenge\client\Register.class
+com\challenge\client\ConfirmApplicant.class
+com\challenge\client\Login.class
+com\challenge\client\ViewApplicants.class
+com\challenge\client\AttemptChallenge.class
