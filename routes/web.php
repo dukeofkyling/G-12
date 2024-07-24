@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SchoolsController;
 use App\Http\Controllers\RepresentativeController;
 
 
@@ -42,3 +43,24 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::post('/representatives', [RepresentativeController::class, 'store'])->name('representatives.store');
+// Route::post('/schools', [SchoolsController::class, 'datasubmit'])->name('schools.datasubmit');
+// // Route::get('/schools',[SchoolsController::class, 'index']);
+// // Route::view('uploadschools','Schools');
+// Route::POST('datasubmit','SchoolsController@datasubmit');
+// Route::post('/datasubmit',function(){
+// 	return view('pages.Schools');
+// });
+// Route::post('/schools',function(){
+// 	$Schools = new Schools();
+// 	$Schools->sname = request('sname');
+// 	$Schools->district = request('district');
+// 	$Schools->regnumber = request('regnumber');
+// 	$Schools->email = request('email');
+// 	$Schools->rname = request('rname');
+// 	$Schools->save();
+// });
+Route::get('/schools', function () {
+    return view('pages.Schools'); // This route should return your form view
+});
+
+Route::post('/datasubmit', [SchoolsController::class, 'datasubmit'])->name('schools.datasubmit');
