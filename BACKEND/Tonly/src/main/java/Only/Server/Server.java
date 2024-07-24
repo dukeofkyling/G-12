@@ -1,29 +1,17 @@
 package Only.Server;
 
 
-
-
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import java.io.*;
 import java.net.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 public class Server {
     private static final Map<String, User> users = new HashMap<>(); // Store user info
     private static final Map<String, Boolean> loggedInUsers = new HashMap<>(); // Track logged-in users
 
     public static void main(String[] args) {
-        int port = 8080;
+        int port = 8000;
 
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             System.out.println("Server listening on port " + port);
@@ -40,50 +28,26 @@ public class Server {
         }
     }
 
-    // private static void handleClientRequest(Socket clientSocket) {
-    //     try (BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-    //          PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)) {
-
-    //         String clientRequest;
-    //         while ((clientRequest = in.readLine()) != null) {
-    //             System.out.println("Received from client: " + clientRequest);
-
-    //             // Process client request (menu options)
-    //             String response = processClientRequest(clientRequest);
-
-    //             // Send response back to client
-    //             out.println(response);
-    //         }
-
-    //         System.out.println("Client disconnected: " + clientSocket.getInetAddress());
-    //     } catch (IOException e) {
-    //         e.printStackTrace();
-    //     }
-    // }
-    
     private static void handleClientRequest(Socket clientSocket) {
         try (BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
              PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)) {
-    
+
             String clientRequest;
             while ((clientRequest = in.readLine()) != null) {
                 System.out.println("Received from client: " + clientRequest);
-    
+
                 // Process client request (menu options)
                 String response = processClientRequest(clientRequest);
-    
+
                 // Send response back to client
                 out.println(response);
             }
-    
+
             System.out.println("Client disconnected: " + clientSocket.getInetAddress());
-        } catch (SocketException e) {
-            System.err.println("Client connection reset: " + e.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
 
     private static String processClientRequest(String request) {
         String[] parts = request.split(":", 2);
@@ -108,7 +72,7 @@ public class Server {
 
     private static String handleRegister(String data) {
         String[] fields = data.split(";");
-        if (fields.length != 7) {
+        if (fields.length != 7) { // Expect seven fields
             return "Invalid registration data.";
         }
 
@@ -117,60 +81,12 @@ public class Server {
             return "Username already exists.";
         }
 
-        User newUser = new User(username, fields[1], fields[2], fields[3], fields[4], fields[5], fields[6]);
+        User newUser = new User(username, fields[1], fields[2], fields[3], fields[4], fields[5], fields[6]); // Include schoolRegNumber
         users.put(username, newUser);
-
-
-
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tonly", "root", "")) {
-            String sql = "INSERT INTO users (username, PASSWORD, firstName, lastName,emailAddress, dateOfBirth,  schoolRegistrationNumber) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            
-            // Create a PreparedStatement with auto-generated keys
-            PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            
-          
-
-            pstmt.setString(1, newUser.username);
-            pstmt.setString(2, newUser.password);
-            pstmt.setString(3, newUser.firstName);
-            pstmt.setString(4, newUser.lastName);
-            pstmt.setString(5, newUser.email);
-            pstmt.setString(6, newUser.dob);
-            pstmt.setString(7, newUser.schoolRegNumber);
-
-            
-            // Execute the INSERT statement
-            int rowsAffected = pstmt.executeUpdate();
-            
-            if (rowsAffected > 0) {
-                System.out.println("Data inserted successfully.");
-                
-                // Retrieve the auto-generated keys if any
-                ResultSet generatedKeys = pstmt.getGeneratedKeys();
-                if (generatedKeys.next()) {
-                    System.out.println("Generated ID: " + generatedKeys.getInt(1));
-                }
-            } else {
-                System.out.println("Failed to insert data.");
-            }
-            
-            // Close resources
-            pstmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    
-
-
-
-       System.out.println("Registered new user: " + username);
-
-       // Send confirmation email
-     // EmailSender.sendConfirmationEmail(newUser.getEmail(), "Your Account Confirmation", "Thank you for registering! Your account has been confirmed.");
+        System.out.println("Registered new user: " + username);
 
         return "Registration successful.";
-}
-
+    }
 
     private static String handleLogin(String data) {
         String[] fields = data.split(";");
@@ -190,6 +106,7 @@ public class Server {
             return "Login failed. Please check your username and password.";
         }
     }
+
 
     private static String handleViewChallenge(String username) {
         if (isLoggedIn(username)) {
@@ -225,73 +142,16 @@ public class Server {
     private static boolean isLoggedIn(String username) {
         return loggedInUsers.getOrDefault(username, false);
     }
-
-   
-
-public class EmailSender {
-    
-    public  void  sendEmail() throws MessagingException {
-        String host = "smtp.gmail.com";
-        String port = "587";
-        String username = "suzieklein003@gmail.com";
-        String password = "nabasumba";
-        
-        // Set properties
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", host);
-        props.put("mail.smtp.port", port);
-        
-        // Create session
-        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
-            }
-        });
-        
-        // Create message
-        Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress(username));
-        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("recipient@example.com"));
-        message.setSubject("Test Email");
-        message.setText("This is a test email.");
-        try{
-        // Send message
-        Transport.send(message);}
-        catch(MessagingException e){
-            e.printStackTrace();
-        }
-        System.out.println("Email sent successfully.");
-         public static void main sendEmail(String[] args) {
-        String to = "recipient@example.com"; // Replace with recipient's email address
-        String subject = "Confirmation Email";
-        String body = "Dear User,\n\n" +
-                "Thank you for registering! Your account has been confirmed.\n\n" +
-                "Best regards,\n" +
-                "The Team";
-    
-        try {
-            sendConfirmationEmail(to,subject,body);
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-    }
 }
-}
-
-
-
 
 class User {
-    public String username;
-    public String password;
-    public String firstName;
-    public String lastName;
-    public String email;
-    public String dob;
-    public String schoolRegNumber; // New field
+    private final String username ,password ,firstName, lastName, email , dob, schoolRegNumber;
+    /*private final String password;
+    private final String firstName;
+    private final String lastName;
+    private final String email;
+    private final String dob;
+    private final String schoolRegNumber; */// New field
 
     public User(String username, String password, String firstName, String lastName, String email, String dob, String schoolRegNumber) {
         this.username = username;
@@ -330,6 +190,4 @@ class User {
     public String getSchoolRegNumber() {
         return schoolRegNumber;
     }
-
-}
 }
