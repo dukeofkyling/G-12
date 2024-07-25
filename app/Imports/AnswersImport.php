@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Models\Answer;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class AnswersImport implements ToModel
 {
