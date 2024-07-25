@@ -1,4 +1,4 @@
-@extends('welcome', ['activePage' => 'typography', 'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION', 'navName' => 'Typography', 'activeButton' => 'laravel'])
+@extends('welcome', ['activePage' => 'Representatives', 'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION', 'navName' => 'Typography', 'activeButton' => 'laravel'])
 
 @section('content')
 <div class="full-page section-image" data-image="{{ asset('light-bootstrap/img/bg5.jpg') }}">
