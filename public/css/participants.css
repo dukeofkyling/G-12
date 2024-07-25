@@ -1,10 +1,5 @@
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:"poppins",sans-serif;
-} 
+
 .center{
     width: 50%;
     margin: auto;
@@ -12,3 +7,28 @@
     padding-top: 200px;
     left: 30%;
 }
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    min-height: 100vh; 
+    /* position: fixed; */
+    display: flex;
+    padding-top: 20px;
+    left: 800px;
+  }
+  .center{
+    position: absolute;
+  }
+  
+  input {
+    width: 400px;
+   
+  }
+  h2{
+    padding-top: 30px;
+  }
+  .upload{
+    background-color: #011425;
+  }
