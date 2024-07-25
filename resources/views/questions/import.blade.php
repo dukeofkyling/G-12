@@ -5,12 +5,12 @@
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body style="background-color: #5C7C89; color: #1F4959;">
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">
+                <div class="card" style="background-color: #0114425;">
+                    <div class="card-header"style="background-color: #0114425;">
                         <h1 class="card-title">Import Questions</h1>
                     </div>
                     <div class="card-body">
@@ -39,4 +39,3 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
