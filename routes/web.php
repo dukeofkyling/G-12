@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RepresentativeController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\SchoolsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,3 +64,11 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::post('/representatives', [RepresentativeController::class, 'store'])->name('representatives.store');
+
+Route::get('/schools', function () {
+    return view('pages.schools'); // Make sure 'schools' matches your blade file name correctly
+});
+
+Route::post('/datasubmit', [SchoolsController::class, 'datasubmit'])->name('schools.datasubmit');
+
+
